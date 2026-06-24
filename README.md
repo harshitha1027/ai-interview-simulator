@@ -29,16 +29,10 @@ This project demonstrates the integration of Artificial Intelligence with modern
 ### Frontend
 
 * ⚛️ React.js
-* 🔀 React Router
-* 🎨 CSS3
-* 📄 HTML5
-* 📜 JavaScript
 
 ### Backend
 
 * ☕ Spring Boot
-* 🌐 Spring Web
-* 🗄️ Spring Data JPA
 
 ### Database
 
