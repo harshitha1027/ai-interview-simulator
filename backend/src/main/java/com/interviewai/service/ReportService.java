@@ -1,0 +1,85 @@
+package com.interviewai.service;
+
+import com.interviewai.dto.ReportResponse;
+import com.interviewai.entity.Answer;
+import com.interviewai.repository.AnswerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+
+@Service
+public class ReportService {
+
+    @Autowired
+    private AnswerRepository answerRepository;
+
+    public ReportResponse generateReport() {
+
+        List<Answer> answers = answerRepository.findAll();
+
+        ReportResponse report = new ReportResponse();
+
+        report.setTotalQuestions(answers.size());
+
+        double avg = answers.stream()
+                .mapToDouble(Answer::getScore)
+                .average()
+                .orElse(0);
+
+        report.setAverageScore(avg);
+
+        if(avg >= 8) {
+            report.setFinalFeedback("Excellent Performance");
+        }
+        else if(avg >= 5) {
+            report.setFinalFeedback("Good Performance");
+        }
+        else {
+            report.setFinalFeedback("Needs Improvement");
+        }
+
+        return report;
+    }
+}
+//@Service
+//public class ReportService {
+//
+//    @Autowired
+//    private AnswerRepository answerRepository;
+//
+//    public ReportResponse generateReport(Long interviewId) {
+//
+//        List<Answer> answers =
+//                answerRepository.findByQuestionInterviewId(interviewId);
+//
+//        double total = 0;
+//
+//        for (Answer answer : answers) {
+//            total += answer.getScore();
+//        }
+//
+//        double average =
+//                answers.isEmpty()
+//                        ? 0
+//                        : total / answers.size();
+//
+//        ReportResponse report =
+//                new ReportResponse();
+//
+//        report.setInterviewId(interviewId);
+//        report.setAverageScore(average);
+//        report.setTotalQuestions(answers.size());
+//
+//        if (average >= 8) {
+//            report.setRating("Excellent");
+//        } else if (average >= 5) {
+//            report.setRating("Good");
+//        } else {
+//            report.setRating("Needs Improvement");
+//        }
+//
+//        return report;
+//    }
+//}

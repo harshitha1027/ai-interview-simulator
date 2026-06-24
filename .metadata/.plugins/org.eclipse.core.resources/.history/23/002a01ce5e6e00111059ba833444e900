@@ -1,0 +1,12 @@
+@Service
+public class GeminiService {
+
+    public String generateQuestions(String role) {
+
+        return """
+                1. What is Java?
+                2. What is OOP?
+                3. Explain JVM.
+                """;
+    }
+}

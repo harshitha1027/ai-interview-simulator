@@ -1,0 +1,68 @@
+package com.interviewai.controller;
+
+
+import java.util.List;
+import com.interviewai.dto.InterviewRequest;
+import com.interviewai.service.InterviewService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.interviewai.service.GeminiService;
+import com.interviewai.dto.AnswerRequest;
+import com.interviewai.service.AnswerService;
+import com.interviewai.service.GeminiService;
+@RestController
+@RequestMapping("/api/interview")
+public class InterviewController {
+
+    @Autowired
+    private InterviewService interviewService;
+
+    @PostMapping("/start")
+    public String startInterview(
+            @RequestBody InterviewRequest request) {
+
+        return interviewService.startInterview(request);
+    }
+    
+//    @PostMapping("/generateQuestions")
+//    public String generateQuestions() {
+//        return "Questions Generated";
+//    }
+//    @PostMapping("/generateQuestions")
+//    public List<String> generateQuestions() {
+//
+//        return List.of(
+//                "What is Java?",
+//                "What is JVM?",
+//                "What is JDK?",
+//                "What is OOP?",
+//                "What is Inheritance?"
+//        );
+//    }
+    
+    @Autowired
+    private GeminiService geminiService;
+
+    @PostMapping("/generateQuestions")
+    public List<String> generateQuestions(
+            @RequestBody InterviewRequest request) {
+
+        return geminiService.generateQuestions(
+                request.getRole());
+    }
+    
+    @Autowired
+    private AnswerService answerService;
+    @PostMapping("/submitAnswer")
+    public String submitAnswer(
+            @RequestBody AnswerRequest request) {
+
+        return answerService.submitAnswer(request);
+        
+        
+    }
+    
+    
+
+  
+}

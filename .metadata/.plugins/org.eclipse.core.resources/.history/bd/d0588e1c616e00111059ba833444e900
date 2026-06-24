@@ -1,0 +1,25 @@
+package com.interviewai.service;
+
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class GeminiService {
+
+    public List<String> generateQuestions(String role) {
+
+        if(role.equalsIgnoreCase("Java Developer")) {
+
+            return List.of(
+                    "What is Java?",
+                    "What is JVM?",
+                    "What is OOP?",
+                    "What is Inheritance?",
+                    "What is Polymorphism?"
+            );
+        }
+
+        return List.of("No questions available");
+    }
+}

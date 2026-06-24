@@ -1,0 +1,26 @@
+package com.interviewai.controller;
+
+import com.interviewai.dto.InterviewRequest;
+import com.interviewai.service.InterviewService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/interview")
+public class InterviewController {
+
+    @Autowired
+    private InterviewService interviewService;
+
+    @PostMapping("/start")
+    public String startInterview(
+            @RequestBody InterviewRequest request) {
+
+        return interviewService.startInterview(request);
+    }
+    
+    @PostMapping("/generateQuestions")
+    public String generateQuestions() {
+        return "Questions Generated";
+    }
+}

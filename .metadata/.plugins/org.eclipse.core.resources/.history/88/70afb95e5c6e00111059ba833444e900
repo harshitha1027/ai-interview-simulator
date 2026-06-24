@@ -1,0 +1,13 @@
+package com.interviewai.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/interview")
+public class InterviewController {
+
+    @PostMapping("/start")
+    public String startInterview() {
+        return "Interview Started";
+    }
+}

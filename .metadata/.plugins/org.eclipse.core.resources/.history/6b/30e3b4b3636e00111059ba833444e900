@@ -1,0 +1,59 @@
+package com.interviewai.service;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+
+@Service
+public class GeminiService {
+
+    @Value("${gemini.api.key}")
+    private String apiKey;
+
+    public String generateQuestions(String role) {
+
+        String url =
+                "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="
+                        + apiKey;
+
+        String prompt =
+                "Generate 5 interview questions for a fresher "
+                        + role +
+                        ". Return only the questions.";
+
+        String requestBody = """
+        {
+          "contents": [
+            {
+              "parts": [
+                {
+                  "text": "%s"
+                }
+              ]
+            }
+          ]
+        }
+        """.formatted(prompt);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity =
+                new HttpEntity<>(requestBody, headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<String> response =
+                restTemplate.exchange(
+                        url,
+                        HttpMethod.POST,
+                        entity,
+                        String.class
+                );
+
+        return response.getBody();
+    }
+}

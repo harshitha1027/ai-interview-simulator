@@ -1,0 +1,51 @@
+package com.interviewai.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "questions")
+public class Question {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String questionText;
+
+    private String difficulty;
+
+    @ManyToOne
+    @JoinColumn(name = "interview_id")
+    private Interview interview;
+
+    public Question() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Interview getInterview() {
+        return interview;
+    }
+
+    public void setInterview(Interview interview) {
+        this.interview = interview;
+    }
+}

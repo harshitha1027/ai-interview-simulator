@@ -1,0 +1,5 @@
+package com.interviewai.dto;
+
+public class ReportResponse {
+
+}
