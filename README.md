@@ -166,7 +166,7 @@ GET  /api/interview/report
 ### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/ai-interview-simulator.git
+git clone https://github.com/harshitha1027/ai-interview-simulator.git
 ```
 
 ### Frontend Setup
